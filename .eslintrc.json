@@ -34,6 +34,7 @@
     "testing-library"
   ],
   "rules": {
+    "react/jsx-no-bind": "off",
     "no-useless-return": "off",
     "react/style-prop-object": "off",
     "no-var-requires": "off",

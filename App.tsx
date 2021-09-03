@@ -12,10 +12,10 @@ import {
 } from '@expo-google-fonts/archivo';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
-import { Text } from 'react-native';
-import { Home } from './src/screens/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import { SchedulingDetails } from './src/screens/SchedulingDetails';
 import theme from './src/styles/theme';
-import { Container, Title } from './src/screens/Home/styles';
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +30,9 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
