@@ -25,7 +25,7 @@ import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
 import { BackButton } from '../../components/BackButton';
 import { Car } from '../../components/Car';
-import { Load } from '../../components/Load';
+import { LoadAnimation } from '../../components/LoadAnimation';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -89,7 +89,7 @@ export function MyCars() {
         <SubTitle>Conforto segurança e praticidade</SubTitle>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <Content>
           <Appointments>

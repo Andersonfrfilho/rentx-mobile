@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet, BackHandler } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useNavigation } from '@react-navigation/native';
@@ -19,10 +19,9 @@ import {
   TotalCars,
   HeaderContent,
   CarsList,
-  MyCarsButton,
 } from './styles';
 import { Car } from '../../components/Car';
-import { Load } from '../../components/Load';
+import { LoadAnimation } from '../../components/LoadAnimation';
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
 
@@ -107,6 +106,13 @@ export function Home() {
     }
     fetchCars();
   }, []);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      return true;
+    });
+  }, []);
+
   return (
     <Container>
       <StatusBar
@@ -117,11 +123,11 @@ export function Home() {
       <Header>
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-          <TotalCars>Total de {cars.length} carros</TotalCars>
+          {!loading && <TotalCars>Total de {cars.length} carros</TotalCars>}
         </HeaderContent>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <CarsList
           data={cars}
