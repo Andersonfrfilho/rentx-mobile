@@ -25,20 +25,6 @@ import { LoadAnimation } from '../../components/LoadAnimation';
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
 
-export type RootStackParamList = {
-  Home: undefined;
-  CarDetails: undefined;
-  Scheduling: undefined;
-  SchedulingComplete: undefined;
-  SchedulingDetails: undefined;
-  MyCars: undefined;
-};
-
-export type HomeScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Home'
->;
-
 const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 const styles = StyleSheet.create({

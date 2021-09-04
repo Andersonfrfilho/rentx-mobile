@@ -36,12 +36,11 @@ import {
   Accessories,
   Footer,
 } from './styles';
-import { HomeScreenNavigationProp } from '../Home';
-import { Car } from '../../components/Car';
 import { CarDTO } from '../../dtos/CarDTO';
 import { getAccessoryIcon } from '../../utils/getAcessoryIcon';
 import { getPlatformDate } from '../../utils/getPlatformDate';
 import { api } from '../../services/api';
+import { ScreenNavigationProp } from '../../routes/stack.routes';
 
 interface Params {
   car: CarDTO;
@@ -56,7 +55,7 @@ export function SchedulingDetails() {
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
     {} as RentalPeriod,
   );
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<ScreenNavigationProp>();
   const theme = useTheme();
   const route = useRoute();
   const { car, dates } = route.params as Params;
@@ -77,7 +76,11 @@ export function SchedulingDetails() {
           'dd/MM/yyyy',
         ),
       });
-      navigation.navigate('SchedulingComplete');
+      navigation.navigate('Confirmation', {
+        nextScreenRoute: 'Home',
+        title: 'Carro Alugado!',
+        message: `Agora você só precisa ir\n até a concessionaria da RENTX\npegar o seu automóvel`,
+      });
     } catch (error) {
       Alert.alert('não foi possível completar o agendamento');
     } finally {
