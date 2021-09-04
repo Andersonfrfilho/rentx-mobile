@@ -12,10 +12,9 @@ import {
 } from '@expo-google-fonts/archivo';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
-import { NavigationContainer } from '@react-navigation/native';
-import { SchedulingDetails } from './src/screens/SchedulingDetails';
 import theme from './src/styles/theme';
 import { Routes } from './src/routes';
+import { AppProvider } from './src/hooks';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,9 +29,9 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
+      <AppProvider>
         <Routes />
-      </NavigationContainer>
+      </AppProvider>
     </ThemeProvider>
   );
 }

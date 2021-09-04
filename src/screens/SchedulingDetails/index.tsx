@@ -37,7 +37,7 @@ import {
   Footer,
 } from './styles';
 import { CarDTO } from '../../dtos/CarDTO';
-import { getAccessoryIcon } from '../../utils/getAcessoryIcon';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import { getPlatformDate } from '../../utils/getPlatformDate';
 import { api } from '../../services/api';
 import { ScreenNavigationProp } from '../../routes/stack.routes';
@@ -59,7 +59,7 @@ export function SchedulingDetails() {
   const theme = useTheme();
   const route = useRoute();
   const { car, dates } = route.params as Params;
-  const rentTotal = Number(dates.length * car.rent.price);
+  const rentTotal = Number(dates.length * car.price);
   async function handleConfirmRental() {
     setLoading(true);
     try {
@@ -117,8 +117,8 @@ export function SchedulingDetails() {
             <Name>{car.name}</Name>
           </Description>
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>{car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>{car.price}</Price>
           </Rent>
         </Details>
         <Accessories>
@@ -155,7 +155,7 @@ export function SchedulingDetails() {
         <RentalPrice>
           <RentalPriceLabel>TOTAL</RentalPriceLabel>
           <RentalPriceDetails>
-            <RentalPriceQuota>{`R$ ${car.rent.price} x${dates.length} diárias`}</RentalPriceQuota>
+            <RentalPriceQuota>{`R$ ${car.price} x${dates.length} diárias`}</RentalPriceQuota>
             <RentalPriceTotal>R$ {rentTotal}</RentalPriceTotal>
           </RentalPriceDetails>
         </RentalPrice>

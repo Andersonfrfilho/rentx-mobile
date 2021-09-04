@@ -8,14 +8,18 @@ import {
   Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 
 import { Container, Header, Title, SubTitle, Form, Footer } from './styles';
 import { ScreenNavigationProp } from '../../routes/stack.routes';
+import { useAuth } from '../../hooks/auth';
 
 export function SignIn() {
+  const theme = useTheme();
+  const { signIn } = useAuth();
   const navigation = useNavigation<ScreenNavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,6 +33,8 @@ export function SignIn() {
         password: Yup.string().required('A senha é obrigatória'),
       });
       await schema.validate({ email, password });
+
+      await signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert('Opa', error.message);
@@ -84,6 +90,7 @@ export function SignIn() {
 
             <Button
               title="Criar conta gratuita"
+              color={theme.colors.background_secondary}
               onPress={handleNewAccount}
               enabled
               loading={false}

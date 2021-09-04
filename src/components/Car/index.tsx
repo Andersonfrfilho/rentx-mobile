@@ -1,8 +1,7 @@
 import React from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler';
-import GasolinaSvg from '../../assets/gasoline.svg';
 import { CarDTO } from '../../dtos/CarDTO';
-import { getAccessoryIcon } from '../../utils/getAcessoryIcon';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import {
   Container,
   Details,
@@ -30,8 +29,8 @@ export function Car({ data, ...rest }: Props) {
         <Name>{data.name}</Name>
         <About>
           <Rent>
-            <Period>Ao dia</Period>
-            <Price>{`R$ ${data.rent.price}}`}</Price>
+            <Period>{data.period}</Period>
+            <Price>{`R$ ${data.price}}`}</Price>
           </Rent>
           <Type>
             <MotorIcon />

@@ -34,7 +34,7 @@ export type ScreenNavigationProp = StackNavigationProp<
   'Home'
 >;
 
-export function StackRoutes() {
+export function AppStackRoutes() {
   return (
     <Navigator
       screenOptions={{
@@ -42,17 +42,9 @@ export function StackRoutes() {
         gestureEnabled: true,
         ...TransitionPresets.ModalPresentationIOS,
       }}
-      initialRouteName="SignIn"
+      initialRouteName="Home"
     >
-      <Screen name="Splash" component={Splash} />
-      <Screen name="SignIn" component={SignIn} />
-      <Screen name="SignUpFirstStep" component={SignUpFirstStep} />
-      <Screen name="SignUpSecondStep" component={SignUpSecondStep} />
-      <Screen
-        name="Home"
-        component={Home}
-        options={{ gestureEnabled: false }}
-      />
+      <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />

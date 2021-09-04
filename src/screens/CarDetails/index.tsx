@@ -19,7 +19,6 @@ import {
   Container,
   Header,
   CarImages,
-  Content,
   Details,
   Description,
   Brand,
@@ -31,9 +30,9 @@ import {
   Accessories,
   Footer,
 } from './styles';
-import { HomeScreenNavigationProp } from '../Home';
 import { CarDTO } from '../../dtos/CarDTO';
-import { getAccessoryIcon } from '../../utils/getAcessoryIcon';
+import { ScreenNavigationProp } from '../../routes/stack.routes';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 interface Params {
   car: CarDTO;
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
   },
 });
 export function CarDetails() {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<ScreenNavigationProp>();
   const route = useRoute();
   const theme = useTheme();
   const { car } = route.params as Params;
@@ -123,8 +122,8 @@ export function CarDetails() {
             <Name>{car.name}</Name>
           </Description>
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.period}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
         <Accessories>

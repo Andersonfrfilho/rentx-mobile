@@ -22,9 +22,8 @@ export const Steps = styled.View`
 
 export const Title = styled.Text`
   font-size: ${RFValue(40)}px;
-  font-family: ${({ theme }) => theme.fonts.archivo_600};
+  font-family: ${({ theme }) => theme.fonts.secondary_600};
   color: ${({ theme }) => theme.colors.title};
-
   margin-top: 60px;
   margin-bottom: 16px;
 `;
@@ -34,8 +33,6 @@ export const SubTitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   color: ${({ theme }) => theme.colors.text};
   line-height: ${RFValue(25)}px;
-
-  margin-bottom: 16px;
 `;
 
 export const Form = styled.View`
@@ -46,8 +43,7 @@ export const Form = styled.View`
 
 export const FormTitle = styled.Text`
   font-size: ${RFValue(20)}px;
-  font-family: ${({ theme }) => theme.fonts.archivo_600};
-  color: ${({ theme }) => theme.colors.text};
-
+  font-family: ${({ theme }) => theme.fonts.secondary_600};
+  color: ${({ theme }) => theme.colors.title};
   margin-bottom: 24px;
 `;
