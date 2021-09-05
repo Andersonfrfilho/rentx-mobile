@@ -51,6 +51,7 @@ export function PasswordInput({ iconName, value, ...rest }: InputProps) {
         {...rest}
         secureTextEntry={isPasswordVisible}
         isFocused={isFocused}
+        autoCorrect={false}
       />
       <BorderlessButton onPress={handlePasswordVisibilityChange}>
         <IconPasswordContainer isFocused={isFocused}>

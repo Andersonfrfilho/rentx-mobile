@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import {
   KeyboardAvoidingView,
@@ -14,8 +14,8 @@ import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 
 import { Container, Header, Title, SubTitle, Form, Footer } from './styles';
-import { ScreenNavigationProp } from '../../routes/stack.routes';
 import { useAuth } from '../../hooks/auth';
+import { ScreenNavigationProp } from '../../routes/app.stack.routes';
 
 export function SignIn() {
   const theme = useTheme();
@@ -45,9 +45,11 @@ export function SignIn() {
       );
     }
   }
+
   function handleNewAccount() {
     navigation.navigate('SignUpFirstStep');
   }
+
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
