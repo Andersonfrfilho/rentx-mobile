@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
@@ -16,34 +18,48 @@ import { PasswordInput } from '../../components/PasswordInput';
 import { Container, Header, Title, SubTitle, Form, Footer } from './styles';
 import { useAuth } from '../../hooks/auth';
 import { ScreenNavigationProp } from '../../routes/app.stack.routes';
+import { InputForm } from '../../components/InputForm';
 
+interface FormData {
+  email: string;
+  password: string;
+}
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .required('E-mail obrigatório')
+    .email('Digite um e-mail válido'),
+  password: Yup.string().required('A senha é obrigatória'),
+});
 export function SignIn() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const theme = useTheme();
   const { signIn } = useAuth();
   const navigation = useNavigation<ScreenNavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  async function handleSignIn() {
-    try {
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido'),
-        password: Yup.string().required('A senha é obrigatória'),
-      });
-      await schema.validate({ email, password });
+  async function handleSignIn(form: FormData) {
+    console.log(form);
+    // try {
 
-      await signIn({ email, password });
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        return Alert.alert('Opa', error.message);
-      }
-      Alert.alert(
-        'Erro na autenticação',
-        'Ocorreu um erro ao fazer login, verifique as credenciais',
-      );
-    }
+    //   await schema.validate({ email, password });
+
+    //   await signIn({ email, password });
+    // } catch (error) {
+    //   if (error instanceof Yup.ValidationError) {
+    //     return Alert.alert('Opa', error.message);
+    //   }
+    //   Alert.alert(
+    //     'Erro na autenticação',
+    //     'Ocorreu um erro ao fazer login, verifique as credenciais',
+    //   );
+    // }
   }
 
   function handleNewAccount() {
@@ -66,14 +82,11 @@ export function SignIn() {
             </SubTitle>
           </Header>
           <Form>
-            <Input
-              iconName="mail"
+            <InputForm
+              name="email"
+              control={control}
               placeholder="E-mail"
-              keyboardType="email-address"
-              autoCorrect={false}
-              autoCapitalize="none"
-              onChangeText={setEmail}
-              value={email}
+              error={errors.email && errors.email.message}
             />
             <PasswordInput
               iconName="lock"
@@ -85,7 +98,7 @@ export function SignIn() {
           <Footer>
             <Button
               title="Login"
-              onPress={handleSignIn}
+              onPress={handleSubmit(handleSignIn)}
               enabled
               loading={false}
             />
